@@ -1,0 +1,55 @@
+hash: bdd81ec081e02796b59440f2fd8464a21d9db698d76ee0f887cc1b4ba76cfe62
+updated: 2016-02-20T23:13:17.210698831+08:00
+imports:
+- name: github.com/boj/redistore
+  version: fc113767cd6b051980f260d6dbe84b2740c46ab0
+- name: github.com/codegangsta/cli
+  version: 5db74198dee1cfe60cf06a611d03a420361baad6
+- name: github.com/flosch/pongo2
+  version: a269242022ae534b052672d6a9326a40560a63e7
+- name: github.com/garyburd/redigo
+  version: 836b6e58b3358112c8291565d01c35b8764070d7
+  subpackages:
+  - /redis
+- name: github.com/gorilla/context
+  version: 1c83b3eabd45b6d76072b66b746c20815fb2872d
+- name: github.com/gorilla/securecookie
+  version: e95799a481bbcc3d01c2ad5178524cb8bec9f370
+- name: github.com/gorilla/sessions
+  version: 715060ac0b7d99d95d1600df329f5da94809023a
+- name: github.com/labstack/echo
+  version: 6914162d64dd26ccd90d7c8b00290364337c134c
+  subpackages:
+  - middleware
+- name: github.com/labstack/gommon
+  version: bfff5bf04688a4048a5cb4dd3b3f0697caaad19c
+  subpackages:
+  - /color
+  - log
+- name: github.com/mattn/go-colorable
+  version: 9cbef7c35391cca05f15f8181dc0b18bc9736dbb
+- name: github.com/mattn/go-isatty
+  version: 56b76bdf51f7708750eac80fa38b952bb9f32639
+- name: github.com/weisd/cache
+  version: 526965515849aae1251e15990e5dd936febbb174
+- name: github.com/xyproto/cookie
+  version: b84c85ae2aa3e21b2c7fc8c37d5a3081c0c9c83b
+- name: github.com/xyproto/pinterface
+  version: d4db92ac11a07dc77faece6d5ec7d64492958f2a
+- name: github.com/xyproto/simpleredis
+  version: de7b4cb9d1be983af7e9924394a27b67927e4918
+- name: golang.org/x/crypto
+  version: ""
+  subpackages:
+  - /bcrypt
+- name: golang.org/x/net
+  version: ""
+  subpackages:
+  - /context
+  - websocket
+- name: gopkg.in/bluesuncorp/validator.v5
+  version: d5acf1dac43705f8bfbb71d878e290e2bed3950b
+- name: gopkg.in/go-playground/validator.v5
+  version: d5acf1dac43705f8bfbb71d878e290e2bed3950b
+  repo: https://gopkg.in/go-playground/validator.v5
+devImports: []
