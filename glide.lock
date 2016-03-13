@@ -1,5 +1,5 @@
-hash: bdd81ec081e02796b59440f2fd8464a21d9db698d76ee0f887cc1b4ba76cfe62
-updated: 2016-02-20T23:13:17.210698831+08:00
+hash: 59583d6919a4e222488d486e682faa3c006e0103eaaef340b807591eb39bf899
+updated: 2016-03-06T12:50:48.151884073+08:00
 imports:
 - name: github.com/boj/redistore
   version: fc113767cd6b051980f260d6dbe84b2740c46ab0
@@ -17,6 +17,10 @@ imports:
   version: e95799a481bbcc3d01c2ad5178524cb8bec9f370
 - name: github.com/gorilla/sessions
   version: 715060ac0b7d99d95d1600df329f5da94809023a
+- name: github.com/jinzhu/gorm
+  version: f8377d80bf0d73b981c7ec39b7483776feedf79b
+- name: github.com/jinzhu/inflection
+  version: 3272df6c21d04180007eb3349844c89a3856bc25
 - name: github.com/labstack/echo
   version: 6914162d64dd26ccd90d7c8b00290364337c134c
   subpackages:
@@ -26,10 +30,18 @@ imports:
   subpackages:
   - /color
   - log
+- name: github.com/lib/pq
+  version: e182dc4027e2ded4b19396d638610f2653295f36
 - name: github.com/mattn/go-colorable
   version: 9cbef7c35391cca05f15f8181dc0b18bc9736dbb
 - name: github.com/mattn/go-isatty
   version: 56b76bdf51f7708750eac80fa38b952bb9f32639
+- name: github.com/mattn/go-shellwords
+  version: f4e566c536cf69158e808ec28ef4182a37fdc981
+- name: github.com/naoina/go-stringutil
+  version: 6b638e95a32d0c1131db0e7fe83775cbea4a0d0b
+- name: github.com/naoina/toml
+  version: 751171607256bb66e64c9f0220c00662420c38e9
 - name: github.com/weisd/cache
   version: 526965515849aae1251e15990e5dd936febbb174
 - name: github.com/xyproto/cookie
@@ -38,18 +50,49 @@ imports:
   version: d4db92ac11a07dc77faece6d5ec7d64492958f2a
 - name: github.com/xyproto/simpleredis
   version: de7b4cb9d1be983af7e9924394a27b67927e4918
-- name: golang.org/x/crypto
+- name: golang.org/x/crypto/bcrypt
   version: ""
-  subpackages:
-  - /bcrypt
+- name: golang.org/x/crypto/blowfish
+  version: ""
+- name: golang.org/x/crypto/ssh/terminal
+  version: ""
 - name: golang.org/x/net
-  version: ""
+  version: b6d7b1396ec874c3b00f6c84cd4301a17c56c8ed
   subpackages:
   - /context
   - websocket
+- name: golang.org/x/net/context
+  version: ""
+- name: golang.org/x/net/html
+  version: ""
+- name: golang.org/x/net/html/atom
+  version: ""
+- name: golang.org/x/net/http2
+  version: ""
+- name: golang.org/x/net/http2/hpack
+  version: ""
+- name: golang.org/x/net/internal/iana
+  version: ""
+- name: golang.org/x/net/internal/timeseries
+  version: ""
+- name: golang.org/x/net/ipv4
+  version: ""
+- name: golang.org/x/net/ipv6
+  version: ""
+- name: golang.org/x/net/webdav/internal/xml
+  version: ""
+- name: golang.org/x/text/encoding
+  version: ""
+- name: golang.org/x/text/encoding/charmap
+  version: ""
+- name: golang.org/x/text/encoding/htmlindex
+  version: ""
+- name: golang.org/x/text/transform
+  version: ""
 - name: gopkg.in/bluesuncorp/validator.v5
   version: d5acf1dac43705f8bfbb71d878e290e2bed3950b
+- name: gopkg.in/fsnotify.v1
+  version: 875cf421b32f8f1b31bd43776297876d01542279
 - name: gopkg.in/go-playground/validator.v5
-  version: d5acf1dac43705f8bfbb71d878e290e2bed3950b
-  repo: https://gopkg.in/go-playground/validator.v5
+  version: ef8ceed2f0d1f2f0e6cf1df8656f54a188476638
 devImports: []

@@ -7,14 +7,16 @@ import:
   subpackages:
   - /redis
 - package: github.com/gorilla/sessions
+- package: github.com/jinzhu/gorm
 - package: github.com/labstack/echo
   subpackages:
   - middleware
+- package: github.com/mattn/go-shellwords
+- package: github.com/naoina/toml
 - package: github.com/weisd/cache
 - package: github.com/xyproto/cookie
 - package: github.com/xyproto/pinterface
 - package: github.com/xyproto/simpleredis
-- package: golang.org/x/crypto
-  subpackages:
-  - /bcrypt
+- package: golang.org/x/crypto/bcrypt
 - package: gopkg.in/bluesuncorp/validator.v5
+- package: gopkg.in/fsnotify.v1

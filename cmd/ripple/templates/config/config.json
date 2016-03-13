@@ -6,8 +6,9 @@
         "templates": "frontend/templates",
         "signup_enable": true,
         "database": {
+            "dialect": "mysql",
             "host": "127.0.0.1",
-            "name": "risample",
+            "dbname": "{{rippleApp}}",
             "user": "root",
             "password": "ming0032"
         }
@@ -18,8 +19,9 @@
         "templates": "frontend/templates",
         "signup_enable": true,
         "database": {
+            "dialect": "mysql",
             "host": "127.0.0.1",
-            "name": "ripple_sample",
+            "dbname": "{{rippleApp}}",
             "user": "root",
             "password": "ming0032"
         }

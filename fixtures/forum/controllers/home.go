@@ -6,14 +6,14 @@ import (
 	"github.com/labstack/echo"
 )
 
-func init() {
-	ripple.RegisterController(&HomeController{})
-}
-
 type HomeController struct {
 	Index echo.HandlerFunc `controller:"GET /"`
 	Html echo.HandlerFunc `controller:"GET html"`
 	String  echo.HandlerFunc `controller:"GET string"`
+}
+
+func init() {
+	ripple.RegisterController(&HomeController{})
 }
 
 func (this HomeController) Path() string {

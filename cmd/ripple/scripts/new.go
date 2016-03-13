@@ -40,7 +40,7 @@ func getAppPath(appName string) (string, error) {
 	var path string
 	goPath := os.Getenv("GOPATH")
 	if goPath == "" {
-		return "", errors.New("GOPATH must be set to use the ripple tool.")
+		return "", errors.New("GOPATH must be set to use the ripple tool")
 	}
 	inGoSrcPath := filepath.Join(goPath, "src", "*")
 	currentPath, _ := os.Getwd()
@@ -135,7 +135,7 @@ func logCreateAppFiles(appPath string) {
 
 // reifyApplication changes import refs within go files to the correct format
 func reifyApplication(templateAppPath, appPath string) error {
-	err := replaceExpressionInTemplates(templateAppPath, appPath, []string{".go", ".toml"})
+	err := replaceExpressionInTemplates(templateAppPath, appPath, []string{".go", ".toml", ".json"})
 	if err != nil {
 		return err
 	}
