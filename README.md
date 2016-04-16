@@ -8,7 +8,7 @@ A framework has 3 parts. A router receiving a request and directing it to a hand
 - Middlewares
 - Handler processing
 
-<img src="https://www.nicolasmerouze.com/img/illustrations/byof-part1@2x.png" width="400" height="275" />
+<img src="https://raw.githubusercontent.com/bmbstack/ripple/master/screenshots/framework.png" width="720" height="576" />
 
 Middlewares handle:
 - error/panic
@@ -66,7 +66,7 @@ This is the structure of the `rippleApp` list application that will showcase how
 12 directories, 15 files
 ```
 
-3# Configurations
+## Configurations
 
 ripple support json configurations files. In our rippleApp app, we put the configuration files in the config directory. I have included all three formats for clarity, you can be just fine with either one of them.
 
@@ -164,7 +164,7 @@ ripple will automatically create the table users if it doesn't exist.
 
 Don't be confused by the schema tag, I just added them since we will use the schema package to decode form values(this has nothing to do with ripple, you can use whatever form library you fancy.)
 
-# Controllers
+## Controllers
 
 ripple controllers are structs that implement the Controller interface. To help make ripple usable, Structs must implement the Controller interface.
 
