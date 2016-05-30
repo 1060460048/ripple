@@ -1,7 +1,6 @@
 package ripple
 
 import (
-	"fmt"
 	"github.com/bmbstack/ripple/middleware/logger"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
@@ -28,7 +27,7 @@ func init() {
 	if baseModel != nil && !baseModel.IsOpenDB() {
 		err := baseModel.OpenWithConfig()
 		if err != nil {
-			fmt.Println(err.Error())
+			Logger.Error(err.Error())
 		}
 	} else {
 		model, err := NewModelWithConfig()
@@ -52,7 +51,7 @@ func NewRipple() *Ripple {
 
 	r.Echo.Use(mw.Recover())
 	r.Echo.Use(mw.LoggerWithConfig(mw.LoggerConfig{
-		Format: "time=${time_rfc3339}, remote_ip=${remote_ip}, method=${method}, uri=${uri}, status=${status}\n",
+		Format: "time=${time_rfc3339}, remote_ip=${remote_ip}, method=${method}, uri=${uri}, status=${status}, latency_human=${latency_human}, rx_bytes=${rx_bytes}, tx_bytes=${tx_bytes}\n",
 	}))
 
 	// Set render

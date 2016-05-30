@@ -140,7 +140,7 @@ func reifyApplication(templateAppPath, appPath string) error {
 	}
 
 	logger.Logger.Notice(fmt.Sprintf("Run command in bash: cd %s", appPath))
-	logger.Logger.Notice(fmt.Sprintf("Run command in bash: wbs -c wbs.toml"))
+	logger.Logger.Notice(fmt.Sprintf("Run command in bash: wbs -c wbs.toml or go run main.go s"))
 	logger.Logger.Notice(fmt.Sprintf("Open this url: http://localhost:%s", HOST_PORT))
 	return nil
 }
