@@ -22,6 +22,7 @@ import (
 	"sync"
 
 	"github.com/flosch/pongo2"
+	"github.com/labstack/echo"
 )
 
 //
@@ -53,7 +54,7 @@ func NewRenderer(opt ...PongorOption) *Renderer {
 	o := prepareOption(opt)
 	r := &Renderer{
 		PongorOption: o,
-		templates:    make(map[string]*pongo2.Template),
+		templates:   make(map[string]*pongo2.Template),
 	}
 	return r
 }
@@ -95,7 +96,7 @@ func (r *Renderer) getTemplate(name string) (t *pongo2.Template, err error) {
 	return
 }
 
-func (r *Renderer) Render(w io.Writer, name string, data interface{}) error {
+func (r *Renderer) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	template, err := r.getTemplate(name)
 	if err != nil {
 		return err

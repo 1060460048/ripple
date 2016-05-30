@@ -1,10 +1,10 @@
 package scripts
 
 import (
-	_ "github.com/bmbstack/ripple/fixtures/forum/controllers"
-	_ "github.com/bmbstack/ripple/fixtures/forum/models"
-	"github.com/bmbstack/ripple/fixtures/forum/logger"
 	"github.com/bmbstack/ripple"
+	_ "github.com/bmbstack/ripple/fixtures/forum/controllers"
+	"github.com/bmbstack/ripple/fixtures/forum/logger"
+	_ "github.com/bmbstack/ripple/fixtures/forum/models"
 )
 
 // Server commands

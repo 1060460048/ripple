@@ -1,8 +1,8 @@
 package logger
 
 import (
-	"os"
 	"github.com/bmbstack/ripple/middleware/logger"
+	"os"
 )
 
 var Logger *logger.Logger

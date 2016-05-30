@@ -2,12 +2,13 @@ package ripple
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
 	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"github.com/jinzhu/gorm"
 )
 
 // Configs  debug, release
@@ -23,16 +24,16 @@ type Config struct {
 	Static       string `json:"static"`
 	Templates    string `json:"templates"`
 	SignupEnable bool   `json:"signup_enable"`
-    Database     *DatabaseConfig
+	Database     *DatabaseConfig
 }
 
-// DatabaseConfig the database configuration 
+// DatabaseConfig the database configuration
 type DatabaseConfig struct {
-    Dialect    string   `json:"dialect"`
-	Host       string   `json:"host"`
-	DbName     string   `json:"dbname"`
-	User       string   `json:"user"`
-	Password   string   `json:"password"`
+	Dialect  string `json:"dialect"`
+	Host     string `json:"host"`
+	DbName   string `json:"dbname"`
+	User     string `json:"user"`
+	Password string `json:"password"`
 }
 
 // Current loaded config
@@ -78,8 +79,8 @@ func initConfig(e *echo.Echo) {
 
 // NewConfig initial configuration from the config.json file and return a config instance
 func NewConfig(e *echo.Echo) *Config {
-    initConfig(e)
-    return config
+	initConfig(e)
+	return config
 }
 
 // GetConfig return the configuration
@@ -89,7 +90,7 @@ func GetConfig() *Config {
 
 // GetDbConfig return the db config instance
 func GetDbConfig() *DatabaseConfig {
-    return config.Database;
+	return config.Database
 }
 
 // GetStaticPath return the static path string
@@ -114,25 +115,25 @@ func Getwd(path string) string {
 
 // GetDbWithGorm return the github.com/jinzhu/gorm db
 func GetDbWithGorm() (gorm.DB, error) {
-    cfg := GetDbConfig()
-    dialect := cfg.Dialect
-    host := cfg.Host
-    dbname := cfg.DbName
-    user := cfg.User
-    password := cfg.Password
-    
-    connURI := "";
-    switch dialect {
-    case "mysql":
-        connURI = user+":"+password+"@tcp("+host+":3306)/"+dbname+"?charset=utf8&parseTime=True&loc=Local"
-    default: 
-        dialect = "mysql"
-        connURI = user+":"+password+"@tcp("+host+":3306)/"+dbname+"?charset=utf8&parseTime=True&loc=Local"
-    }
+	cfg := GetDbConfig()
+	dialect := cfg.Dialect
+	host := cfg.Host
+	dbname := cfg.DbName
+	user := cfg.User
+	password := cfg.Password
 
-	Logger().Infof("[gorm] db_dialect: %s", dialect)
-	Logger().Infof("[gorm] db_connURI: %s", connURI)
+	connURI := ""
+	switch dialect {
+	case "mysql":
+		connURI = user + ":" + password + "@tcp(" + host + ":3306)/" + dbname + "?charset=utf8&parseTime=True&loc=Local"
+	default:
+		dialect = "mysql"
+		connURI = user + ":" + password + "@tcp(" + host + ":3306)/" + dbname + "?charset=utf8&parseTime=True&loc=Local"
+	}
 
-    db, err := gorm.Open(dialect, connURI)
+	Logger.Info(fmt.Sprintf("[gorm] db_dialect: %s", dialect))
+	Logger.Info(fmt.Sprintf("[gorm] db_connURI: %s", connURI))
+
+	db, err := gorm.Open(dialect, connURI)
 	return db, err
 }

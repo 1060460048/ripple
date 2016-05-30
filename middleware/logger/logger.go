@@ -5,20 +5,21 @@ package logger
 import (
 	"bytes"
 	"fmt"
-	"log"
-	"time"
-	"os"
 	"io"
+	"log"
+	"os"
 	"sync/atomic"
+	"time"
 )
 
 var (
-// Map for te various codes of colors
+	// Map for te various codes of colors
 	colors map[string]string
 
-// Contains color strings for stdout
+	// Contains color strings for stdout
 	logNo uint64
 )
+
 // Color numbers for stdout
 const (
 	Black = (iota + 30)
@@ -59,7 +60,19 @@ type Logger struct {
 
 // Returns a proper string to be outputted for a particular info
 func (r *Info) Output() string {
-	msg := fmt.Sprintf(r.format, r.Id, r.Time, r.Level, r.Message)
+
+	var idString string
+	if r.Id < 10 {
+		// 001
+		idString = fmt.Sprintf("00%d", r.Id)
+	} else if r.Id >= 10 && r.Id <= 99 {
+		// 010
+		idString = fmt.Sprintf("0%d", r.Id)
+	} else {
+		//1000
+	}
+
+	msg := fmt.Sprintf(r.format, idString, r.Time, r.Level, r.Message)
 	return msg
 }
 
@@ -76,9 +89,9 @@ func (w *Worker) Log(level string, calldepth int, info *Info) error {
 		buf.Write([]byte(colors[level]))
 		buf.Write([]byte(info.Output()))
 		buf.Write([]byte("\033[0m"))
-		return w.Minion.Output(calldepth + 1, buf.String())
+		return w.Minion.Output(calldepth+1, buf.String())
 	} else {
-		return w.Minion.Output(calldepth + 1, info.Output())
+		return w.Minion.Output(calldepth+1, info.Output())
 	}
 }
 
@@ -95,7 +108,7 @@ func initColors() {
 		"WARNING":  colorString(Yellow),
 		"NOTICE":   colorString(Green),
 		"DEBUG":    colorString(Cyan),
-		"INFO" :    colorString(White),
+		"INFO":     colorString(White),
 	}
 }
 
@@ -109,7 +122,7 @@ func NewLogger(args ...interface{}) (*Logger, error) {
 	var color int = 1
 	var out io.Writer = os.Stderr
 
-	for _, arg := range (args) {
+	for _, arg := range args {
 		switch t := arg.(type) {
 		case string:
 			module = t
@@ -128,7 +141,7 @@ func NewLogger(args ...interface{}) (*Logger, error) {
 // The log commnand is the function available to user to log message, lvl specifies
 // the degree of the messagethe user wants to log, message is the info user wants to log
 func (l *Logger) Log(lvl string, message string) {
-	var formatString string = "#%d %s ▶ %.3s %s"
+	var formatString string = "#%s %s ▶ %.3s %s"
 	info := &Info{
 		Id:      atomic.AddUint64(&logNo, 1),
 		Time:    time.Now().Format("2006-01-02 15:04:05"),

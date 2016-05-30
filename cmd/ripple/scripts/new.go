@@ -1,15 +1,15 @@
 package scripts
 
 import (
-	"os"
-	"path/filepath"
+	"errors"
 	"fmt"
-	"strings"
 	"github.com/bmbstack/ripple/cmd/ripple/logger"
 	"github.com/bmbstack/ripple/cmd/ripple/utils"
-	"path"
 	"io/ioutil"
-	"errors"
+	"os"
+	"path"
+	"path/filepath"
+	"strings"
 )
 
 // NewApplication create a new application with the appName
@@ -84,12 +84,11 @@ func copyApplication(templateAppPath, appPath string) error {
 		return err
 	}
 
-	logCreateAppFiles(appPath);
+	logCreateAppFiles(appPath)
 
 	// Now reifyApplication
 	return reifyApplication(templateAppPath, appPath)
 }
-
 
 // fileExists returns true if this file exists
 func fileExists(path string) bool {
@@ -124,7 +123,7 @@ func logCreateAppFiles(appPath string) {
 		// Deal with files only
 		if !info.IsDir() {
 			file = strings.Replace(file, path.Join(os.Getenv("GOPATH"), "src"), "", 1)
-			logger.Logger.Debug(fmt.Sprintf("Create file: %s", file))
+			logger.Logger.Debug(fmt.Sprintf("Create file: $GOPATH%s", file))
 		}
 		return nil
 	})
@@ -146,6 +145,7 @@ func reifyApplication(templateAppPath, appPath string) error {
 	return nil
 }
 
+// replaceExpressionInTemplates replace expression in the template
 func replaceExpressionInTemplates(templateAppPath, appPath string, extentions []string) error {
 	files, err := utils.CollectFiles(appPath, extentions)
 	if err != nil {
@@ -170,7 +170,7 @@ func replaceExpressionInTemplates(templateAppPath, appPath string, extentions []
 		}
 
 		if strings.Contains(fileString, EXPRESSION_APP_NAME) {
-			appName := utils.Substring(appPath, strings.LastIndex(appPath, "/") + 1, len(appPath))
+			appName := utils.Substring(appPath, strings.LastIndex(appPath, "/")+1, len(appPath))
 			fileString = strings.Replace(fileString, EXPRESSION_APP_NAME, appName, -1)
 		}
 

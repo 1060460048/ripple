@@ -2,10 +2,10 @@ package ripple
 
 import (
 	"errors"
+	"fmt"
 	"github.com/labstack/echo"
 	"reflect"
 	"strings"
-	"fmt"
 )
 
 // fieldTagKey is the field tag key for ripple
@@ -20,7 +20,7 @@ type Controller interface {
 // AddControllers applies the Controller to the echo via a new Group using the
 // Controller's ripple tags as a manifest to properly associate methods/path and
 // handler.
-func AddController(echoMux *echo.Echo, c Controller) {
+func AddController(echoMux echo.Echo, c Controller) {
 	ctlValue, ctlType, err := reflectCtrl(c)
 	if err != nil {
 		panic(err)
@@ -84,10 +84,10 @@ type structFielder interface {
 // fieldInfo is the basic meta data parsed from a struct field. This does not
 // include the actual field value or the <name>Func method it represents.
 type fieldInfo struct {
-	Path     string
-	Method   string
-	Name     string
-	Type     reflect.Type
+	Path   string
+	Method string
+	Name   string
+	Type   reflect.Type
 
 	// EchoType represents the type of field in relation to echo either a handler
 	// or middleware
@@ -139,7 +139,7 @@ var methodMap = map[string]string{
 type tagInfo struct {
 	meth, path string
 
-	EchoType   echoType
+	EchoType echoType
 }
 
 func parseTag(tag string) (*tagInfo, error) {
@@ -218,14 +218,6 @@ func (r resource) callName() string {
 	return methodMap[r.Method]
 }
 
-// Set sets the resources on the given group
-func (r resource) Set(grp *echo.Group) {
-	reflect.
-	ValueOf(grp).
-	MethodByName(r.callName()).
-	Call(r.callArgs())
-}
-
 func (r resource) callArgs() []reflect.Value {
 	if r.isMiddleware() {
 		return []reflect.Value{r.Func}
@@ -235,6 +227,14 @@ func (r resource) callArgs() []reflect.Value {
 		reflect.ValueOf(r.Path),
 		r.Func,
 	}
+}
+
+// Set sets the resources on the given group
+func (r resource) Set(grp *echo.Group) {
+	reflect.
+		ValueOf(grp).
+		MethodByName(r.callName()).
+		Call(r.callArgs())
 }
 
 // structField is a wrapper that implements structFielder
@@ -259,7 +259,7 @@ var errTypeMismatch = errors.New("field and method types do not match")
 // getResourceFunc returns the associated <name>Func method for a defined ripple
 // field or the actual field value if the <name>Func association is not found.
 func getResourceFunc(
-fieldinf *fieldInfo, v reflect.Value) (reflect.Value, error) {
+	fieldinf *fieldInfo, v reflect.Value) (reflect.Value, error) {
 
 	var fn reflect.Value
 

@@ -6,17 +6,24 @@ import:
 - package: github.com/garyburd/redigo
   subpackages:
   - /redis
+- package: github.com/go-sql-driver/mysql
 - package: github.com/gorilla/sessions
 - package: github.com/jinzhu/gorm
 - package: github.com/labstack/echo
   subpackages:
+  - engine/standard
   - middleware
+- package: github.com/labstack/gommon
+  subpackages:
+  - /log
 - package: github.com/mattn/go-shellwords
 - package: github.com/naoina/toml
 - package: github.com/weisd/cache
 - package: github.com/xyproto/cookie
 - package: github.com/xyproto/pinterface
 - package: github.com/xyproto/simpleredis
-- package: golang.org/x/crypto/bcrypt
+- package: golang.org/x/crypto
+  subpackages:
+  - /bcrypt
 - package: gopkg.in/bluesuncorp/validator.v5
 - package: gopkg.in/fsnotify.v1

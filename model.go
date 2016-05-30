@@ -1,18 +1,18 @@
 package ripple
 
 import (
-	"reflect"
+	"errors"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"reflect"
 	"strings"
-	"errors"
 )
 
 // Model facilitate database interactions, support mysql
 type Model struct {
-	models map[string]reflect.Value
+	models   map[string]reflect.Value
 	isOpenDB bool
-	*gorm.DB
+	gorm.DB
 }
 
 // NewModel returns a new Model without opening database connection
@@ -37,7 +37,7 @@ func (m *Model) OpenWithConfig() error {
 	if err != nil {
 		return err
 	}
-	m.DB = &db
+	m.DB = db
 	m.isOpenDB = true
 	return nil
 }
