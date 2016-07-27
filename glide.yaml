@@ -13,9 +13,6 @@ import:
   subpackages:
   - engine/standard
   - middleware
-- package: github.com/labstack/gommon
-  subpackages:
-  - /log
 - package: github.com/mattn/go-shellwords
 - package: github.com/naoina/toml
 - package: github.com/weisd/cache

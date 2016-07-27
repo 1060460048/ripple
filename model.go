@@ -12,7 +12,7 @@ import (
 type Model struct {
 	models   map[string]reflect.Value
 	isOpenDB bool
-	gorm.DB
+	*gorm.DB
 }
 
 // NewModel returns a new Model without opening database connection

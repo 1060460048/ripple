@@ -114,7 +114,7 @@ func Getwd(path string) string {
 }
 
 // GetDbWithGorm return the github.com/jinzhu/gorm db
-func GetDbWithGorm() (gorm.DB, error) {
+func GetDbWithGorm() (*gorm.DB, error) {
 	cfg := GetDbConfig()
 	dialect := cfg.Dialect
 	host := cfg.Host
