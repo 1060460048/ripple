@@ -35,35 +35,25 @@ Middlewares handle:
 This is the structure of the `rippleApp` list application that will showcase how you can build web apps with `ripple`:
 
 ```shell
-├── bin
-│   └── rippleApp
-├── config
-│   └── config.json
+.
+├── config.json
 ├── controllers
 │   └── home.go
 ├── frontend
 │   ├── static
-│   │   ├── css
-│   │   │   └── app.css
-│   │   └── js
-│   │       └── app.js
 │   └── templates
-│       └── home
-│           ├── html.html
-│           └── index.html
 ├── logger
 │   └── logger.go
 ├── main.go
 ├── models
 │   └── user.go
-├── scripts
-│   ├── commands.go
-│   ├── const.go
-│   ├── init.go
-│   └── server.go
-└── wbs.toml
+└── scripts
+    ├── commands.go
+    ├── const.go
+    ├── init.go
+    └── server.go
 
-12 directories, 15 files
+7 directories, 9 files
 ```
 
 ## Configurations
@@ -286,15 +276,15 @@ func RunServer() {
 
 ## Installation
 ```shell
+$ curl https://glide.sh/get | sh
 $ go get github.com/bmbstack/ripple
 $ go get github.com/bmbstack/ripple/cmd/ripple
-$ go get github.com/bmbstack/ripple/cmd/wbs
 $ ripple new rippleApp
 $ cd $GOPATH/src/rippleApp
-$ wbs -c wbs.toml
+$ go run main.go server
 ```
 	
-Then, Open the url:	[http://localhost:8090](http://localhost:8090)
+Then, Open the url:	[http://127.0.0.1:8090](http://127.0.0.1:8090)
 
 ## Screenshots
 
