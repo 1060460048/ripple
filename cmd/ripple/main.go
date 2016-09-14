@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/bmbstack/ripple/cmd/ripple/scripts"
 	"github.com/codegangsta/cli"
 	"os"
-	"github.com/bmbstack/ripple/cmd/ripple/scripts"
 )
 
 func main() {
@@ -16,4 +16,3 @@ func main() {
 	app.Commands = scripts.Commands()
 	app.Run(os.Args)
 }
-

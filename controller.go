@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/labstack/echo"
+	"github.com/labstack/gommon/color"
 	"reflect"
 	"strings"
 )
@@ -39,7 +40,7 @@ func AddController(echoMux echo.Echo, c Controller) {
 			continue // if there is no route
 		}
 
-		res.Set(grp)
+		res.Set(grp, c.Path())
 	}
 }
 
@@ -57,6 +58,7 @@ func reflectCtrl(c Controller) (reflect.Value, reflect.Type, error) {
 		err = errNotStruct
 	}
 
+	fmt.Println(fmt.Sprintf("------------------------%s: %v, Path: %s ------------------------", color.Bold("RegisterController"), color.Bold(color.Green(ctlType)), color.Bold(color.Yellow(c.Path()))))
 	return ctlValue, ctlType, err
 }
 
@@ -114,9 +116,9 @@ func newFieldInfo(f structFielder) (*fieldInfo, error) {
 }
 
 // MethodName returns the associated method name for ripple field.
-// eg. Index -> IndexFunc
+// eg. Index -> ActionIndex
 func (f fieldInfo) MethodName() string {
-	return fmt.Sprintf("%sFunc", f.Name)
+	return fmt.Sprintf("Action%s", f.Name)
 }
 
 // methodMap maps all echo methods that match the func(string, echo.Handler)
@@ -230,11 +232,13 @@ func (r resource) callArgs() []reflect.Value {
 }
 
 // Set sets the resources on the given group
-func (r resource) Set(grp *echo.Group) {
-	reflect.
-		ValueOf(grp).
-		MethodByName(r.callName()).
-		Call(r.callArgs())
+func (r resource) Set(grp *echo.Group, path string) {
+	fmt.Println(fmt.Sprintf("%s method: %v, path: %s, action: %v",
+		color.Yellow("[echo.Set]"),
+		color.Bold(color.Green(r.callName())),
+		color.Bold(color.Red(path+r.fieldInfo.Path)),
+		color.Bold(color.Yellow("Action"+r.fieldInfo.Name))))
+	reflect.ValueOf(grp).MethodByName(r.callName()).Call(r.callArgs())
 }
 
 // structField is a wrapper that implements structFielder

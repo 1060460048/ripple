@@ -1,10 +1,10 @@
 package scripts
+
 import (
+	"github.com/bmbstack/ripple/cmd/ripple/logger"
 	"github.com/codegangsta/cli"
 	"os/exec"
-	"github.com/bmbstack/ripple/cmd/ripple/logger"
 )
-
 
 // Commands
 func Commands() []cli.Command {

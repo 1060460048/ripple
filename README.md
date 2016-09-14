@@ -175,8 +175,8 @@ type Controller interface {
 ```
 This creates a new Echo group at the Controller#Path, in our example /posts, with all the defined actions.
 ```shell
- GET /posts     => #IndexFunc
- GET /posts/:id => #ShowFunc
+ GET /posts     => #ActionIndex
+ GET /posts/:id => #ActionShow
 ```
 
 Our rippleApp Controller is in the controllers/home.go
@@ -204,7 +204,7 @@ func (this HomeController) Path() string {
 	return "/"
 }
 
-func (this HomeController) IndexFunc(ctx *echo.Context) error {
+func (this HomeController) ActionIndex(ctx *echo.Context) error {
 	ctx.Render(http.StatusOK, "home/index.html", map[string]interface{}{
 		"title": "Hello, forum is a Ripple application ",
 	})
@@ -212,7 +212,7 @@ func (this HomeController) IndexFunc(ctx *echo.Context) error {
 	return nil
 }
 
-func (this HomeController) HtmlFunc(ctx *echo.Context) error {
+func (this HomeController) ActionHtml(ctx *echo.Context) error {
 	ctx.Render(http.StatusOK, "home/html.html", map[string]interface{}{
 		"title": "Hello, this is a html template",
 	})
@@ -220,7 +220,7 @@ func (this HomeController) HtmlFunc(ctx *echo.Context) error {
 	return nil
 }
 
-func (this HomeController) StringFunc(ctx *echo.Context) error {
+func (this HomeController) ActionString(ctx *echo.Context) error {
 	return ctx.String(http.StatusOK, "Hello, this is a string")
 }
 

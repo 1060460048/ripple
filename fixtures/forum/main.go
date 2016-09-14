@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/bmbstack/ripple/fixtures/forum/scripts"
 	"github.com/codegangsta/cli"
 	"os"
-	"github.com/bmbstack/ripple/fixtures/forum/scripts"
 )
 
 func main() {
