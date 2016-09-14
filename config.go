@@ -2,7 +2,6 @@ package ripple
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
 	"io"
@@ -41,7 +40,7 @@ var config *Config
 
 // initConfig load the config file for application
 func initConfig(e *echo.Echo) {
-	configFile := Getwd("config/config.json")
+	configFile := Getwd("config.json")
 	var input = io.ReadCloser(os.Stdin)
 	input, configErr := os.Open(configFile)
 	if configErr != nil {
@@ -130,9 +129,6 @@ func GetDbWithGorm() (*gorm.DB, error) {
 		dialect = "mysql"
 		connURI = user + ":" + password + "@tcp(" + host + ":3306)/" + dbname + "?charset=utf8&parseTime=True&loc=Local"
 	}
-
-	Logger.Info(fmt.Sprintf("[gorm] db_dialect: %s", dialect))
-	Logger.Info(fmt.Sprintf("[gorm] db_connURI: %s", connURI))
 
 	db, err := gorm.Open(dialect, connURI)
 	return db, err

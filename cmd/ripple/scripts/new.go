@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/bmbstack/ripple/cmd/ripple/logger"
 	"github.com/bmbstack/ripple/cmd/ripple/utils"
+	"github.com/labstack/gommon/color"
 	"io/ioutil"
 	"os"
 	"path"
@@ -139,9 +140,9 @@ func reifyApplication(templateAppPath, appPath string) error {
 		return err
 	}
 
-	logger.Logger.Notice(fmt.Sprintf("Run command in bash: cd %s", appPath))
-	logger.Logger.Notice(fmt.Sprintf("Run command in bash: wbs -c wbs.toml or go run main.go s"))
-	logger.Logger.Notice(fmt.Sprintf("Open this url: http://localhost:%s", HOST_PORT))
+	logger.Logger.Notice(fmt.Sprintf("Run command in bash: %s", color.Bold(color.Green("cd "+appPath))))
+	logger.Logger.Notice(fmt.Sprintf("Run command in bash: %s", color.Bold(color.Green("go run main.go s"))))
+	logger.Logger.Notice(fmt.Sprintf("Open this url: http://127.0.0.1:%s", HOST_PORT))
 	return nil
 }
 

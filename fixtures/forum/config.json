@@ -1,0 +1,29 @@
+{
+    "debug_on": true,
+    "debug": {
+        "domain": "127.0.0.1:8090",
+        "static": "frontend/static",
+        "templates": "frontend/templates",
+        "signup_enable": true,
+        "database": {
+            "dialect": "mysql",
+            "host": "127.0.0.1",
+            "dbname": "forum",
+            "user": "root",
+            "password": "ming0032"
+        }
+    },
+    "release": {
+        "domain": "http://ripple.bmbstack.cn",
+        "static": "frontend/static",
+        "templates": "frontend/templates",
+        "signup_enable": true,
+        "database": {
+            "dialect": "mysql",
+            "host": "127.0.0.1",
+            "dbname": "forum",
+            "user": "root",
+            "password": "ming0032"
+        }
+    }
+}

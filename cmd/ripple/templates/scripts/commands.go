@@ -36,7 +36,6 @@ func Commands() []cli.Command {
 				commands := GetServerCommands(db)
 				RunScript(commands)
 				RunServer()
-				logger.Logger.Info("Run server done")
 			},
 		},
 	}

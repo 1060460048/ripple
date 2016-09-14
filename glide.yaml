@@ -5,7 +5,7 @@ import:
 - package: github.com/flosch/pongo2
 - package: github.com/garyburd/redigo
   subpackages:
-  - /redis
+  - redis
 - package: github.com/go-sql-driver/mysql
 - package: github.com/gorilla/sessions
 - package: github.com/jinzhu/gorm
@@ -13,14 +13,14 @@ import:
   subpackages:
   - engine/standard
   - middleware
-- package: github.com/mattn/go-shellwords
-- package: github.com/naoina/toml
+- package: github.com/labstack/gommon
+  subpackages:
+  - color
 - package: github.com/weisd/cache
 - package: github.com/xyproto/cookie
 - package: github.com/xyproto/pinterface
 - package: github.com/xyproto/simpleredis
 - package: golang.org/x/crypto
   subpackages:
-  - /bcrypt
+  - bcrypt
 - package: gopkg.in/bluesuncorp/validator.v5
-- package: gopkg.in/fsnotify.v1

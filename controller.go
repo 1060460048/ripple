@@ -58,7 +58,7 @@ func reflectCtrl(c Controller) (reflect.Value, reflect.Type, error) {
 		err = errNotStruct
 	}
 
-	fmt.Println(fmt.Sprintf("------------------------%s: %v, Path: %s ------------------------", color.Bold("RegisterController"), color.Bold(color.Green(ctlType)), color.Bold(color.Yellow(c.Path()))))
+	fmt.Println(fmt.Sprintf("%s: %v, Path: %s", color.Bold("[RegisterController]"), color.Bold(color.Blue(ctlType)), color.Bold(color.Yellow(c.Path()))))
 	return ctlValue, ctlType, err
 }
 
@@ -234,10 +234,10 @@ func (r resource) callArgs() []reflect.Value {
 // Set sets the resources on the given group
 func (r resource) Set(grp *echo.Group, path string) {
 	fmt.Println(fmt.Sprintf("%s method: %v, path: %s, action: %v",
-		color.Yellow("[echo.Set]"),
-		color.Bold(color.Green(r.callName())),
-		color.Bold(color.Red(path+r.fieldInfo.Path)),
-		color.Bold(color.Yellow("Action"+r.fieldInfo.Name))))
+		color.Bold(color.Yellow("[router]")),
+		color.Green(r.callName()),
+		color.Red(path+r.fieldInfo.Path),
+		color.Yellow("Action"+r.fieldInfo.Name)))
 	reflect.ValueOf(grp).MethodByName(r.callName()).Call(r.callArgs())
 }
 

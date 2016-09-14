@@ -2,8 +2,10 @@ package ripple
 
 import (
 	"errors"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
+	"github.com/labstack/gommon/color"
 	"reflect"
 	"strings"
 )
@@ -62,6 +64,7 @@ func (m *Model) AddModels(values ...interface{}) error {
 			switch rVal.Kind() {
 			case reflect.Struct:
 				models[getTypName(rVal.Type())] = reflect.New(rVal.Type())
+				fmt.Println(fmt.Sprintf("%s: %v", color.Bold("[RegisterModel]"), color.Bold(color.Blue(rVal.Type()))))
 			default:
 				return errors.New("ripple: model must be struct type")
 			}

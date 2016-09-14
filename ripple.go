@@ -1,15 +1,21 @@
 package ripple
 
 import (
+	"fmt"
 	"github.com/bmbstack/ripple/middleware/logger"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	mw "github.com/labstack/echo/middleware"
+	"github.com/labstack/gommon/color"
 	"os"
 )
 
 var Logger *logger.Logger
 var baseRipple *Ripple
+var firstRegController bool = true
+var firstRegModel bool = true
+var line1 string = "=============================="
+var line2 string = "================================"
 
 // Ripple ripple struct
 type Ripple struct {
@@ -28,16 +34,16 @@ func init() {
 		err := baseModel.OpenWithConfig()
 		if err != nil {
 			Logger.Error(err.Error())
+			panic(err)
 		}
 	} else {
 		model, err := NewModelWithConfig()
 		if err != nil {
 			Logger.Error(err.Error())
+			panic(err)
 		}
 		baseRipple.Set(model)
 	}
-
-	Logger.Info("[gorm] initial DB finished")
 }
 
 // NewRipple new a ripple instance
@@ -85,12 +91,26 @@ func (baseRipple *Ripple) Set(value interface{}) {
 
 // RegisterControllers register a controller for ripple App
 func RegisterController(c Controller) {
+	if firstRegController {
+		fmt.Println(fmt.Sprintf("%s%s%s",
+			color.White(line1),
+			color.Bold(color.Green("Controller information")),
+			color.White(line1)))
+	}
 	AddController(*baseRipple.Echo, c)
+	firstRegController = false
 }
 
 // RegisterModels registers models in the global ripple App.
 func RegisterModels(models ...interface{}) {
+	if firstRegModel {
+		fmt.Println(fmt.Sprintf("%s%s%s",
+			color.White(line2),
+			color.Bold(color.Green("Model information")),
+			color.White(line2)))
+	}
 	baseRipple.Model.AddModels(models...)
+	firstRegModel = false
 }
 
 // Migrate runs migrations on the global ripple App.
@@ -101,6 +121,6 @@ func Migrate() {
 // Run run ripple application
 func Run() {
 	Migrate()
-	Logger.Info("Ripple Run...")
+	Logger.Info(fmt.Sprintf("Ripple ListenAndServe: %s", color.Green(baseRipple.Config.Domain)))
 	baseRipple.Echo.Run(standard.New(baseRipple.Config.Domain))
 }
