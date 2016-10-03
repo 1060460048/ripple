@@ -89,6 +89,11 @@ func (baseRipple *Ripple) Set(value interface{}) {
 	}
 }
 
+// GetModel  return ripple model
+func GetModel() *Model {
+	return baseRipple.Model
+}
+
 // RegisterControllers register a controller for ripple App
 func RegisterController(c Controller) {
 	if firstRegController {
